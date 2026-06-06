@@ -46,13 +46,16 @@ function Page() {
       />
       <div className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {items.map((i) => (
-            <article key={i.t} className="rounded-2xl border border-border bg-card p-7 shadow-card">
-              <div className="grid h-12 w-12 place-items-center rounded-lg bg-navy text-primary-foreground">
-                <i.icon className="h-6 w-6" />
+          {items.map((i, idx) => (
+            <article key={i.t} className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
+              <img src={polImgs[idx % polImgs.length]} alt={i.t} loading="lazy" className="h-36 w-full object-cover" />
+              <div className="p-7">
+                <div className="grid h-12 w-12 place-items-center rounded-lg bg-navy text-primary-foreground">
+                  <i.icon className="h-6 w-6" />
+                </div>
+                <h3 className="mt-4 text-lg font-bold">{i.t}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{i.d}</p>
               </div>
-              <h3 className="mt-4 text-lg font-bold">{i.t}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{i.d}</p>
             </article>
           ))}
         </div>
