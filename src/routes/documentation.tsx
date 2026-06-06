@@ -2,7 +2,17 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout, PageHero } from "@/components/layout/SiteLayout";
 import { documents } from "@/data/content";
 import docsImg from "@/assets/docs.jpg";
+import customsImg from "@/assets/customs.jpg";
+import financeImg from "@/assets/finance.jpg";
+import portImg from "@/assets/hero-port.jpg";
+import shipImg from "@/assets/ship.jpg";
+import containersImg from "@/assets/containers.jpg";
+import globalImg from "@/assets/global-trade.jpg";
+import policyImg from "@/assets/policy.jpg";
+import warehouseImg from "@/assets/warehouse.jpg";
 import { FileText } from "lucide-react";
+
+const docImgs = [docsImg, financeImg, customsImg, shipImg, containersImg, portImg, globalImg, warehouseImg, policyImg];
 
 export const Route = createFileRoute("/documentation")({
   head: () => ({

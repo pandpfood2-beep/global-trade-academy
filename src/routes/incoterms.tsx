@@ -49,6 +49,7 @@ function Page() {
                 <Row label="Cons" value={i.cons} />
                 <Row label="Example" value={i.example} />
               </dl>
+              </div>
             </article>
           ))}
         </div>
