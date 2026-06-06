@@ -2,6 +2,14 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout, PageHero } from "@/components/layout/SiteLayout";
 import { incoterms } from "@/data/content";
 import shipImg from "@/assets/ship.jpg";
+import containersImg from "@/assets/containers.jpg";
+import aircargoImg from "@/assets/aircargo.jpg";
+import warehouseImg from "@/assets/warehouse.jpg";
+import portImg from "@/assets/hero-port.jpg";
+import customsImg from "@/assets/customs.jpg";
+import globalImg from "@/assets/global-trade.jpg";
+
+const imgs = [shipImg, containersImg, portImg, aircargoImg, warehouseImg, customsImg, globalImg];
 
 export const Route = createFileRoute("/incoterms")({
   head: () => ({
@@ -24,8 +32,10 @@ function Page() {
       />
       <div className="mx-auto max-w-7xl px-4 py-16 lg:px-8">
         <div className="grid gap-6 md:grid-cols-2">
-          {incoterms.map((i) => (
-            <article key={i.code} className="rounded-2xl border border-border bg-card p-7 shadow-card">
+          {incoterms.map((i, idx) => (
+            <article key={i.code} className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
+              <img src={imgs[idx % imgs.length]} alt={`${i.code} ${i.name}`} loading="lazy" className="h-40 w-full object-cover" />
+              <div className="p-7">
               <div className="flex items-baseline gap-3">
                 <span className="rounded-md bg-navy px-3 py-1 text-sm font-bold text-primary-foreground">{i.code}</span>
                 <h3 className="text-xl font-bold">{i.name}</h3>
