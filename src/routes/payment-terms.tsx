@@ -2,6 +2,14 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout, PageHero } from "@/components/layout/SiteLayout";
 import { payments } from "@/data/content";
 import docsImg from "@/assets/docs.jpg";
+import financeImg from "@/assets/finance.jpg";
+import customsImg from "@/assets/customs.jpg";
+import globalImg from "@/assets/global-trade.jpg";
+import shipImg from "@/assets/ship.jpg";
+import containersImg from "@/assets/containers.jpg";
+import warehouseImg from "@/assets/warehouse.jpg";
+
+const payImgs = [financeImg, docsImg, customsImg, globalImg, shipImg, containersImg, warehouseImg];
 
 export const Route = createFileRoute("/payment-terms")({
   head: () => ({
@@ -24,15 +32,18 @@ function Page() {
       />
       <div className="mx-auto max-w-6xl px-4 py-16 lg:px-8">
         <div className="grid gap-6 md:grid-cols-2">
-          {payments.map((p) => (
-            <article key={p.name} className="rounded-2xl border border-border bg-card p-7 shadow-card">
-              <h3 className="text-xl font-bold text-navy dark:text-brand-light">{p.name}</h3>
-              <dl className="mt-4 space-y-3 text-sm">
-                <Row label="How it works" value={p.how} />
-                <Row label="Advantages" value={p.pros} />
-                <Row label="Risks" value={p.risks} />
-                <Row label="Example" value={p.example} />
-              </dl>
+          {payments.map((p, idx) => (
+            <article key={p.name} className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
+              <img src={payImgs[idx % payImgs.length]} alt={p.name} loading="lazy" className="h-44 w-full object-cover" />
+              <div className="p-7">
+                <h3 className="text-xl font-bold text-navy dark:text-brand-light">{p.name}</h3>
+                <dl className="mt-4 space-y-3 text-sm">
+                  <Row label="How it works" value={p.how} />
+                  <Row label="Advantages" value={p.pros} />
+                  <Row label="Risks" value={p.risks} />
+                  <Row label="Example" value={p.example} />
+                </dl>
+              </div>
             </article>
           ))}
         </div>

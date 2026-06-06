@@ -1,6 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout, PageHero } from "@/components/layout/SiteLayout";
 import customsImg from "@/assets/customs.jpg";
+import portImg from "@/assets/hero-port.jpg";
+import docsImg from "@/assets/docs.jpg";
+import containersImg from "@/assets/containers.jpg";
+import policyImg from "@/assets/policy.jpg";
 import { Shield, FileText, CheckCircle2, ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/cha")({
@@ -28,30 +32,36 @@ function Page() {
       />
       <div className="mx-auto max-w-6xl px-4 py-16 lg:px-8 space-y-14">
         <section className="grid gap-8 md:grid-cols-2">
-          <div className="rounded-2xl border border-border bg-card p-8 shadow-card">
-            <Shield className="h-10 w-10 text-brand" />
-            <h2 className="mt-4 text-2xl font-bold">What is a CHA?</h2>
-            <p className="mt-3 text-sm text-muted-foreground">
-              A Custom House Agent (now formally called Customs Broker) is a person licensed under the
-              Customs Brokers Licensing Regulations, 2018 to transact business at customs on behalf of
-              importers and exporters. They file shipping bills/bills of entry, coordinate examination
-              and ensure compliance with customs law.
-            </p>
+          <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
+            <img src={customsImg} alt="Custom House Agent" loading="lazy" className="h-44 w-full object-cover" />
+            <div className="p-8">
+              <Shield className="h-10 w-10 text-brand" />
+              <h2 className="mt-4 text-2xl font-bold">What is a CHA?</h2>
+              <p className="mt-3 text-sm text-muted-foreground">
+                A Custom House Agent (now formally called Customs Broker) is a person licensed under the
+                Customs Brokers Licensing Regulations, 2018 to transact business at customs on behalf of
+                importers and exporters. They file shipping bills/bills of entry, coordinate examination
+                and ensure compliance with customs law.
+              </p>
+            </div>
           </div>
-          <div className="rounded-2xl border border-border bg-card p-8 shadow-card">
-            <FileText className="h-10 w-10 text-brand" />
-            <h2 className="mt-4 text-2xl font-bold">Role of a CHA</h2>
-            <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-              {["Documentation & classification of goods","Filing on ICEGATE / EDI","Liaison with customs officers","Coordinating with shipping lines & CFS","Claiming duty drawbacks/incentives","Advising on changes in policy"].map((p) => (
-                <li key={p} className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 flex-none text-brand" />{p}</li>
-              ))}
-            </ul>
+          <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
+            <img src={docsImg} alt="Role of a CHA" loading="lazy" className="h-44 w-full object-cover" />
+            <div className="p-8">
+              <FileText className="h-10 w-10 text-brand" />
+              <h2 className="mt-4 text-2xl font-bold">Role of a CHA</h2>
+              <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
+                {["Documentation & classification of goods","Filing on ICEGATE / EDI","Liaison with customs officers","Coordinating with shipping lines & CFS","Claiming duty drawbacks/incentives","Advising on changes in policy"].map((p) => (
+                  <li key={p} className="flex gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 flex-none text-brand" />{p}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         </section>
 
         <section className="grid gap-8 md:grid-cols-2">
-          <Process title="Export Customs Procedure" steps={exportSteps} />
-          <Process title="Import Customs Procedure" steps={importSteps} />
+          <Process title="Export Customs Procedure" steps={exportSteps} image={portImg} />
+          <Process title="Import Customs Procedure" steps={importSteps} image={containersImg} />
         </section>
 
         <section className="rounded-2xl border border-border bg-secondary/40 p-8">
@@ -92,19 +102,22 @@ function Page() {
   );
 }
 
-function Process({ title, steps }: { title: string; steps: string[] }) {
+function Process({ title, steps, image }: { title: string; steps: string[]; image?: string }) {
   return (
-    <div className="rounded-2xl border border-border bg-card p-8 shadow-card">
-      <h3 className="text-xl font-bold">{title}</h3>
-      <ol className="mt-5 space-y-3">
-        {steps.map((s, i) => (
-          <li key={s} className="flex items-start gap-3 text-sm">
-            <span className="grid h-7 w-7 flex-none place-items-center rounded-full bg-brand/10 text-xs font-bold text-brand">{i + 1}</span>
-            <span className="pt-0.5">{s}</span>
-            {i < steps.length - 1 && <ArrowRight className="hidden h-4 w-4 text-border" />}
-          </li>
-        ))}
-      </ol>
+    <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
+      {image && <img src={image} alt={title} loading="lazy" className="h-40 w-full object-cover" />}
+      <div className="p-8">
+        <h3 className="text-xl font-bold">{title}</h3>
+        <ol className="mt-5 space-y-3">
+          {steps.map((s, i) => (
+            <li key={s} className="flex items-start gap-3 text-sm">
+              <span className="grid h-7 w-7 flex-none place-items-center rounded-full bg-brand/10 text-xs font-bold text-brand">{i + 1}</span>
+              <span className="pt-0.5">{s}</span>
+              {i < steps.length - 1 && <ArrowRight className="hidden h-4 w-4 text-border" />}
+            </li>
+          ))}
+        </ol>
+      </div>
     </div>
   );
 }
