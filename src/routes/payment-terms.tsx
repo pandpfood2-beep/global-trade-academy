@@ -10,7 +10,6 @@ import containersImg from "@/assets/containers.jpg";
 import warehouseImg from "@/assets/warehouse.jpg";
 
 const payImgs = [financeImg, docsImg, customsImg, globalImg, shipImg, containersImg, warehouseImg];
-import docsImg from "@/assets/docs.jpg";
 
 export const Route = createFileRoute("/payment-terms")({
   head: () => ({
