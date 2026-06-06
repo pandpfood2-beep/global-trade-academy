@@ -35,13 +35,16 @@ function Page() {
       />
       <div className="mx-auto max-w-6xl px-4 py-16 lg:px-8">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {documents.map((d) => (
-            <article key={d.name} className="group rounded-2xl border border-border bg-card p-6 shadow-card transition-all hover:-translate-y-1 hover:shadow-elegant">
-              <div className="grid h-11 w-11 place-items-center rounded-lg bg-navy text-primary-foreground">
-                <FileText className="h-5 w-5" />
+          {documents.map((d, idx) => (
+            <article key={d.name} className="group overflow-hidden rounded-2xl border border-border bg-card shadow-card transition-all hover:-translate-y-1 hover:shadow-elegant">
+              <img src={docImgs[idx % docImgs.length]} alt={d.name} loading="lazy" className="h-36 w-full object-cover" />
+              <div className="p-6">
+                <div className="grid h-11 w-11 place-items-center rounded-lg bg-navy text-primary-foreground">
+                  <FileText className="h-5 w-5" />
+                </div>
+                <h3 className="mt-4 font-semibold text-navy dark:text-brand-light">{d.name}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{d.desc}</p>
               </div>
-              <h3 className="mt-4 font-semibold text-navy dark:text-brand-light">{d.name}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{d.desc}</p>
             </article>
           ))}
         </div>

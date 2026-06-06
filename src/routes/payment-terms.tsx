@@ -2,6 +2,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout, PageHero } from "@/components/layout/SiteLayout";
 import { payments } from "@/data/content";
 import docsImg from "@/assets/docs.jpg";
+import financeImg from "@/assets/finance.jpg";
+import customsImg from "@/assets/customs.jpg";
+import globalImg from "@/assets/global-trade.jpg";
+import shipImg from "@/assets/ship.jpg";
+import containersImg from "@/assets/containers.jpg";
+import warehouseImg from "@/assets/warehouse.jpg";
+
+const payImgs = [financeImg, docsImg, customsImg, globalImg, shipImg, containersImg, warehouseImg];
+import docsImg from "@/assets/docs.jpg";
 
 export const Route = createFileRoute("/payment-terms")({
   head: () => ({
