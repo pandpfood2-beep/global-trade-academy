@@ -102,19 +102,22 @@ function Page() {
   );
 }
 
-function Process({ title, steps }: { title: string; steps: string[] }) {
+function Process({ title, steps, image }: { title: string; steps: string[]; image?: string }) {
   return (
-    <div className="rounded-2xl border border-border bg-card p-8 shadow-card">
-      <h3 className="text-xl font-bold">{title}</h3>
-      <ol className="mt-5 space-y-3">
-        {steps.map((s, i) => (
-          <li key={s} className="flex items-start gap-3 text-sm">
-            <span className="grid h-7 w-7 flex-none place-items-center rounded-full bg-brand/10 text-xs font-bold text-brand">{i + 1}</span>
-            <span className="pt-0.5">{s}</span>
-            {i < steps.length - 1 && <ArrowRight className="hidden h-4 w-4 text-border" />}
-          </li>
-        ))}
-      </ol>
+    <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
+      {image && <img src={image} alt={title} loading="lazy" className="h-40 w-full object-cover" />}
+      <div className="p-8">
+        <h3 className="text-xl font-bold">{title}</h3>
+        <ol className="mt-5 space-y-3">
+          {steps.map((s, i) => (
+            <li key={s} className="flex items-start gap-3 text-sm">
+              <span className="grid h-7 w-7 flex-none place-items-center rounded-full bg-brand/10 text-xs font-bold text-brand">{i + 1}</span>
+              <span className="pt-0.5">{s}</span>
+              {i < steps.length - 1 && <ArrowRight className="hidden h-4 w-4 text-border" />}
+            </li>
+          ))}
+        </ol>
+      </div>
     </div>
   );
 }
