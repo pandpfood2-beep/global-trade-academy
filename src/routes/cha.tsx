@@ -32,7 +32,6 @@ function Page() {
       />
       <div className="mx-auto max-w-6xl px-4 py-16 lg:px-8 space-y-14">
         <section className="grid gap-8 md:grid-cols-2">
-        <section className="grid gap-8 md:grid-cols-2">
           <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-card">
             <img src={customsImg} alt="Custom House Agent" loading="lazy" className="h-44 w-full object-cover" />
             <div className="p-8">
