@@ -1,7 +1,17 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout, PageHero } from "@/components/layout/SiteLayout";
 import customsImg from "@/assets/customs.jpg";
+import policyImg from "@/assets/policy.jpg";
+import financeImg from "@/assets/finance.jpg";
+import globalImg from "@/assets/global-trade.jpg";
+import portImg from "@/assets/hero-port.jpg";
+import containersImg from "@/assets/containers.jpg";
+import docsImg from "@/assets/docs.jpg";
+import warehouseImg from "@/assets/warehouse.jpg";
+import shipImg from "@/assets/ship.jpg";
 import { Award, Building2, FileBadge, Globe2, Landmark, ScrollText, ShieldCheck, Sparkles, Receipt } from "lucide-react";
+
+const polImgs = [policyImg, docsImg, financeImg, customsImg, globalImg, containersImg, portImg, warehouseImg, shipImg];
 
 export const Route = createFileRoute("/government-policies")({
   head: () => ({
