@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import {
   Ship, Plane, Truck, FileText, Globe, Shield, ArrowRight, BookOpen,
-  TrendingUp, Award, Users, CheckCircle2,
+  TrendingUp, Award, Users, CheckCircle2, Hash, ShieldAlert,
 } from "lucide-react";
 import heroImg from "@/assets/hero-port.jpg";
 import shipImg from "@/assets/ship.jpg";
@@ -24,13 +24,15 @@ export const Route = createFileRoute("/")({
 });
 
 const categories = [
-  { to: "/incoterms", icon: Globe, title: "Incoterms 2020", desc: "All 11 rules explained with examples." },
-  { to: "/cha", icon: Shield, title: "CHA & Customs", desc: "Custom house agent role & clearance process." },
+  { to: "/incoterms", icon: Globe, title: "Incoterms 2020", desc: "All 11 rules explained step by step with examples." },
+  { to: "/cha", icon: Shield, title: "CHA & Customs", desc: "Custom house agent role & step-by-step clearance." },
   { to: "/documentation", icon: FileText, title: "Trade Documents", desc: "Invoice, B/L, LC, IEC and more." },
+  { to: "/hsn-code", icon: Hash, title: "HSN Code Guide", desc: "Structure, chapters and how to classify products." },
   { to: "/shipping", icon: Ship, title: "Shipping & Logistics", desc: "Sea, air, road, rail and warehousing." },
   { to: "/payment-terms", icon: TrendingUp, title: "Payment Terms", desc: "LC, TT, DP, DA and open account." },
+  { to: "/risk-management", icon: ShieldAlert, title: "Risk Management", desc: "Payment, currency, transit & political risk." },
   { to: "/government-policies", icon: Award, title: "Govt. Policies", desc: "DGFT, IEC, GST, RoDTEP, SEZ benefits." },
-];
+] as const;
 
 const stats = [
   { v: "15K+", l: "Students Trained" },
