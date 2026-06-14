@@ -12,9 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ShippingRouteImport } from './routes/shipping'
+import { Route as RiskManagementRouteImport } from './routes/risk-management'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PaymentTermsRouteImport } from './routes/payment-terms'
 import { Route as IncotermsRouteImport } from './routes/incoterms'
+import { Route as HsnCodeRouteImport } from './routes/hsn-code'
 import { Route as GovernmentPoliciesRouteImport } from './routes/government-policies'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as DocumentationRouteImport } from './routes/documentation'
@@ -40,6 +42,11 @@ const ShippingRoute = ShippingRouteImport.update({
   path: '/shipping',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RiskManagementRoute = RiskManagementRouteImport.update({
+  id: '/risk-management',
+  path: '/risk-management',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
@@ -53,6 +60,11 @@ const PaymentTermsRoute = PaymentTermsRouteImport.update({
 const IncotermsRoute = IncotermsRouteImport.update({
   id: '/incoterms',
   path: '/incoterms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HsnCodeRoute = HsnCodeRouteImport.update({
+  id: '/hsn-code',
+  path: '/hsn-code',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GovernmentPoliciesRoute = GovernmentPoliciesRouteImport.update({
@@ -111,9 +123,11 @@ export interface FileRoutesByFullPath {
   '/documentation': typeof DocumentationRoute
   '/faq': typeof FaqRoute
   '/government-policies': typeof GovernmentPoliciesRoute
+  '/hsn-code': typeof HsnCodeRoute
   '/incoterms': typeof IncotermsRoute
   '/payment-terms': typeof PaymentTermsRoute
   '/privacy': typeof PrivacyRoute
+  '/risk-management': typeof RiskManagementRoute
   '/shipping': typeof ShippingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
@@ -128,9 +142,11 @@ export interface FileRoutesByTo {
   '/documentation': typeof DocumentationRoute
   '/faq': typeof FaqRoute
   '/government-policies': typeof GovernmentPoliciesRoute
+  '/hsn-code': typeof HsnCodeRoute
   '/incoterms': typeof IncotermsRoute
   '/payment-terms': typeof PaymentTermsRoute
   '/privacy': typeof PrivacyRoute
+  '/risk-management': typeof RiskManagementRoute
   '/shipping': typeof ShippingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
@@ -146,9 +162,11 @@ export interface FileRoutesById {
   '/documentation': typeof DocumentationRoute
   '/faq': typeof FaqRoute
   '/government-policies': typeof GovernmentPoliciesRoute
+  '/hsn-code': typeof HsnCodeRoute
   '/incoterms': typeof IncotermsRoute
   '/payment-terms': typeof PaymentTermsRoute
   '/privacy': typeof PrivacyRoute
+  '/risk-management': typeof RiskManagementRoute
   '/shipping': typeof ShippingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
@@ -165,9 +183,11 @@ export interface FileRouteTypes {
     | '/documentation'
     | '/faq'
     | '/government-policies'
+    | '/hsn-code'
     | '/incoterms'
     | '/payment-terms'
     | '/privacy'
+    | '/risk-management'
     | '/shipping'
     | '/sitemap.xml'
     | '/terms'
@@ -182,9 +202,11 @@ export interface FileRouteTypes {
     | '/documentation'
     | '/faq'
     | '/government-policies'
+    | '/hsn-code'
     | '/incoterms'
     | '/payment-terms'
     | '/privacy'
+    | '/risk-management'
     | '/shipping'
     | '/sitemap.xml'
     | '/terms'
@@ -199,9 +221,11 @@ export interface FileRouteTypes {
     | '/documentation'
     | '/faq'
     | '/government-policies'
+    | '/hsn-code'
     | '/incoterms'
     | '/payment-terms'
     | '/privacy'
+    | '/risk-management'
     | '/shipping'
     | '/sitemap.xml'
     | '/terms'
@@ -217,9 +241,11 @@ export interface RootRouteChildren {
   DocumentationRoute: typeof DocumentationRoute
   FaqRoute: typeof FaqRoute
   GovernmentPoliciesRoute: typeof GovernmentPoliciesRoute
+  HsnCodeRoute: typeof HsnCodeRoute
   IncotermsRoute: typeof IncotermsRoute
   PaymentTermsRoute: typeof PaymentTermsRoute
   PrivacyRoute: typeof PrivacyRoute
+  RiskManagementRoute: typeof RiskManagementRoute
   ShippingRoute: typeof ShippingRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
@@ -248,6 +274,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShippingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/risk-management': {
+      id: '/risk-management'
+      path: '/risk-management'
+      fullPath: '/risk-management'
+      preLoaderRoute: typeof RiskManagementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacy': {
       id: '/privacy'
       path: '/privacy'
@@ -267,6 +300,13 @@ declare module '@tanstack/react-router' {
       path: '/incoterms'
       fullPath: '/incoterms'
       preLoaderRoute: typeof IncotermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hsn-code': {
+      id: '/hsn-code'
+      path: '/hsn-code'
+      fullPath: '/hsn-code'
+      preLoaderRoute: typeof HsnCodeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/government-policies': {
@@ -345,9 +385,11 @@ const rootRouteChildren: RootRouteChildren = {
   DocumentationRoute: DocumentationRoute,
   FaqRoute: FaqRoute,
   GovernmentPoliciesRoute: GovernmentPoliciesRoute,
+  HsnCodeRoute: HsnCodeRoute,
   IncotermsRoute: IncotermsRoute,
   PaymentTermsRoute: PaymentTermsRoute,
   PrivacyRoute: PrivacyRoute,
+  RiskManagementRoute: RiskManagementRoute,
   ShippingRoute: ShippingRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,

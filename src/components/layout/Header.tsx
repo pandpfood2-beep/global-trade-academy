@@ -8,13 +8,15 @@ const navLinks = [
   { to: "/incoterms", label: "Incoterms" },
   { to: "/cha", label: "CHA" },
   { to: "/documentation", label: "Docs" },
+  { to: "/hsn-code", label: "HSN Code" },
   { to: "/shipping", label: "Shipping" },
   { to: "/payment-terms", label: "Payments" },
+  { to: "/risk-management", label: "Risk Mgmt" },
   { to: "/government-policies", label: "Policies" },
   { to: "/blog", label: "Blog" },
   { to: "/faq", label: "FAQ" },
   { to: "/contact", label: "Contact" },
-];
+] as const;
 
 export function Header() {
   const [open, setOpen] = useState(false);
