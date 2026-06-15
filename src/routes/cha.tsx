@@ -129,6 +129,24 @@ function Page() {
           </div>
         </section>
 
+        {/* CHA Categories — Full info on every type of clearance */}
+        <section>
+          <h2 className="text-3xl font-bold">All CHA Work Categories — Real Workings & Why a CHA is Needed</h2>
+          <p className="mt-3 text-muted-foreground">Complete breakdown of every type of customs clearance a Custom House Agent handles in India and the exact reason a licensed CHA is mandatory in each category.</p>
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            {chaCategories.map((c, idx) => (
+              <article key={c.name} className="rounded-2xl border border-border bg-card p-6 shadow-card">
+                <div className="flex items-center gap-3">
+                  <span className="grid h-9 w-9 place-items-center rounded-full bg-brand text-sm font-bold text-primary-foreground">{idx + 1}</span>
+                  <h3 className="text-lg font-bold">{c.name}</h3>
+                </div>
+                <p className="mt-3 text-sm leading-[1.75] text-muted-foreground">{c.why}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+
         {/* Docs */}
         <section className="rounded-2xl border border-border bg-secondary/40 p-8">
           <h2 className="text-2xl font-bold">Documents You Must Provide to the CHA</h2>
