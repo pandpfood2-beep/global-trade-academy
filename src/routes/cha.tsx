@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout, PageHero } from "@/components/layout/SiteLayout";
+import { chaCategories } from "@/data/extended";
 import customsImg from "@/assets/customs.jpg";
 import portImg from "@/assets/hero-port.jpg";
 import docsImg from "@/assets/docs.jpg";
