@@ -103,6 +103,13 @@ function Page() {
                 </div>
                 <p className="mt-4 text-sm md:text-base text-muted-foreground leading-relaxed">{i.def}</p>
 
+                {incotermsLong[i.code] && (
+                  <div className="mt-6 rounded-xl border-l-4 border-brand bg-secondary/40 p-5">
+                    <h4 className="text-sm font-bold uppercase tracking-wider text-brand">Full Explanation — {i.code}</h4>
+                    <p className="mt-3 text-sm md:text-[15px] leading-[1.8] text-foreground whitespace-pre-line">{incotermsLong[i.code]}</p>
+                  </div>
+                )}
+
                 <dl className="mt-6 grid gap-4 md:grid-cols-2">
                   <Row label="Seller Duties" value={i.seller} />
                   <Row label="Buyer Duties" value={i.buyer} />
