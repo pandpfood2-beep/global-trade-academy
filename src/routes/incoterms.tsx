@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout, PageHero } from "@/components/layout/SiteLayout";
 import { incoterms } from "@/data/content";
+import { incotermsLong } from "@/data/extended";
 import shipImg from "@/assets/ship.jpg";
 import containersImg from "@/assets/containers.jpg";
 import aircargoImg from "@/assets/aircargo.jpg";
