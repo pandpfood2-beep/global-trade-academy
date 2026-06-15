@@ -49,7 +49,7 @@ export const Route = createFileRoute("/blog/$slug")({
 });
 
 function Page() {
-  const { post } = Route.useLoaderData();
+  const { post } = Route.useLoaderData() as { post: (typeof blogs)[number] };
   return (
     <SiteLayout>
       <PageHero eyebrow={post.tag} title={post.title} subtitle={post.excerpt} image={post.image} />
