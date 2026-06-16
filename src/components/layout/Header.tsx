@@ -1,20 +1,18 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, Moon, Sun, Ship, Search } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 
 const navLinks = [
   { to: "/", label: "Home" },
+  { to: "/directory", label: "Directory" },
   { to: "/about-export-import", label: "Export Import" },
   { to: "/incoterms", label: "Incoterms" },
   { to: "/cha", label: "CHA" },
   { to: "/documentation", label: "Docs" },
-  { to: "/hsn-code", label: "HSN Code" },
   { to: "/shipping", label: "Shipping" },
   { to: "/payment-terms", label: "Payments" },
-  { to: "/risk-management", label: "Risk Mgmt" },
-  { to: "/government-policies", label: "Policies" },
   { to: "/blog", label: "Blog" },
-  { to: "/faq", label: "FAQ" },
   { to: "/contact", label: "Contact" },
 ] as const;
 
@@ -22,6 +20,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [dark, setDark] = useState(false);
   const [search, setSearch] = useState(false);
+  const { user } = useAuth();
 
   useEffect(() => {
     const saved = localStorage.getItem("theme") === "dark";
@@ -78,12 +77,21 @@ export function Header() {
           >
             {dark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>
-          <Link
-            to="/contact"
-            className="hidden sm:inline-flex items-center rounded-md bg-navy px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90"
-          >
-            Enroll Now
-          </Link>
+          {user ? (
+            <Link
+              to="/dashboard"
+              className="hidden sm:inline-flex items-center rounded-md bg-navy px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90"
+            >
+              Dashboard
+            </Link>
+          ) : (
+            <Link
+              to="/auth"
+              className="hidden sm:inline-flex items-center rounded-md bg-navy px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90"
+            >
+              Sign In / Register
+            </Link>
+          )}
           <button
             onClick={() => setOpen((o) => !o)}
             className="xl:hidden grid h-9 w-9 place-items-center rounded-md text-foreground hover:bg-secondary"

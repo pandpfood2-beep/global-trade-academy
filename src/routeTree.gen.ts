@@ -20,13 +20,20 @@ import { Route as HsnCodeRouteImport } from './routes/hsn-code'
 import { Route as GovernmentPoliciesRouteImport } from './routes/government-policies'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as DocumentationRouteImport } from './routes/documentation'
+import { Route as DirectoryRouteImport } from './routes/directory'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ChaRouteImport } from './routes/cha'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AboutExportImportRouteImport } from './routes/about-export-import'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CompanySlugRouteImport } from './routes/company.$slug'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedCompanyNewRouteImport } from './routes/_authenticated/company.new'
+import { Route as AuthenticatedCompanyEditRouteImport } from './routes/_authenticated/company.edit'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -83,6 +90,11 @@ const DocumentationRoute = DocumentationRouteImport.update({
   path: '/documentation',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DirectoryRoute = DirectoryRouteImport.update({
+  id: '/directory',
+  path: '/directory',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -98,6 +110,11 @@ const BlogRoute = BlogRouteImport.update({
   path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutExportImportRoute = AboutExportImportRouteImport.update({
   id: '/about-export-import',
   path: '/about-export-import',
@@ -108,9 +125,18 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompanySlugRoute = CompanySlugRouteImport.update({
+  id: '/company/$slug',
+  path: '/company/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
@@ -118,14 +144,32 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => BlogRoute,
 } as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCompanyNewRoute = AuthenticatedCompanyNewRouteImport.update({
+  id: '/company/new',
+  path: '/company/new',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCompanyEditRoute =
+  AuthenticatedCompanyEditRouteImport.update({
+    id: '/company/edit',
+    path: '/company/edit',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/about-export-import': typeof AboutExportImportRoute
+  '/auth': typeof AuthRoute
   '/blog': typeof BlogRouteWithChildren
   '/cha': typeof ChaRoute
   '/contact': typeof ContactRoute
+  '/directory': typeof DirectoryRoute
   '/documentation': typeof DocumentationRoute
   '/faq': typeof FaqRoute
   '/government-policies': typeof GovernmentPoliciesRoute
@@ -137,15 +181,21 @@ export interface FileRoutesByFullPath {
   '/shipping': typeof ShippingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/company/$slug': typeof CompanySlugRoute
+  '/company/edit': typeof AuthenticatedCompanyEditRoute
+  '/company/new': typeof AuthenticatedCompanyNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/about-export-import': typeof AboutExportImportRoute
+  '/auth': typeof AuthRoute
   '/blog': typeof BlogRouteWithChildren
   '/cha': typeof ChaRoute
   '/contact': typeof ContactRoute
+  '/directory': typeof DirectoryRoute
   '/documentation': typeof DocumentationRoute
   '/faq': typeof FaqRoute
   '/government-policies': typeof GovernmentPoliciesRoute
@@ -157,16 +207,23 @@ export interface FileRoutesByTo {
   '/shipping': typeof ShippingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/company/$slug': typeof CompanySlugRoute
+  '/company/edit': typeof AuthenticatedCompanyEditRoute
+  '/company/new': typeof AuthenticatedCompanyNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/about-export-import': typeof AboutExportImportRoute
+  '/auth': typeof AuthRoute
   '/blog': typeof BlogRouteWithChildren
   '/cha': typeof ChaRoute
   '/contact': typeof ContactRoute
+  '/directory': typeof DirectoryRoute
   '/documentation': typeof DocumentationRoute
   '/faq': typeof FaqRoute
   '/government-policies': typeof GovernmentPoliciesRoute
@@ -178,7 +235,11 @@ export interface FileRoutesById {
   '/shipping': typeof ShippingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/company/$slug': typeof CompanySlugRoute
+  '/_authenticated/company/edit': typeof AuthenticatedCompanyEditRoute
+  '/_authenticated/company/new': typeof AuthenticatedCompanyNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -186,9 +247,11 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/about-export-import'
+    | '/auth'
     | '/blog'
     | '/cha'
     | '/contact'
+    | '/directory'
     | '/documentation'
     | '/faq'
     | '/government-policies'
@@ -200,15 +263,21 @@ export interface FileRouteTypes {
     | '/shipping'
     | '/sitemap.xml'
     | '/terms'
+    | '/dashboard'
     | '/blog/$slug'
+    | '/company/$slug'
+    | '/company/edit'
+    | '/company/new'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/about-export-import'
+    | '/auth'
     | '/blog'
     | '/cha'
     | '/contact'
+    | '/directory'
     | '/documentation'
     | '/faq'
     | '/government-policies'
@@ -220,15 +289,22 @@ export interface FileRouteTypes {
     | '/shipping'
     | '/sitemap.xml'
     | '/terms'
+    | '/dashboard'
     | '/blog/$slug'
+    | '/company/$slug'
+    | '/company/edit'
+    | '/company/new'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/about'
     | '/about-export-import'
+    | '/auth'
     | '/blog'
     | '/cha'
     | '/contact'
+    | '/directory'
     | '/documentation'
     | '/faq'
     | '/government-policies'
@@ -240,16 +316,23 @@ export interface FileRouteTypes {
     | '/shipping'
     | '/sitemap.xml'
     | '/terms'
+    | '/_authenticated/dashboard'
     | '/blog/$slug'
+    | '/company/$slug'
+    | '/_authenticated/company/edit'
+    | '/_authenticated/company/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   AboutExportImportRoute: typeof AboutExportImportRoute
+  AuthRoute: typeof AuthRoute
   BlogRoute: typeof BlogRouteWithChildren
   ChaRoute: typeof ChaRoute
   ContactRoute: typeof ContactRoute
+  DirectoryRoute: typeof DirectoryRoute
   DocumentationRoute: typeof DocumentationRoute
   FaqRoute: typeof FaqRoute
   GovernmentPoliciesRoute: typeof GovernmentPoliciesRoute
@@ -261,6 +344,7 @@ export interface RootRouteChildren {
   ShippingRoute: typeof ShippingRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
+  CompanySlugRoute: typeof CompanySlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -342,6 +426,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocumentationRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/directory': {
+      id: '/directory'
+      path: '/directory'
+      fullPath: '/directory'
+      preLoaderRoute: typeof DirectoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -363,6 +454,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about-export-import': {
       id: '/about-export-import'
       path: '/about-export-import'
@@ -377,11 +475,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/company/$slug': {
+      id: '/company/$slug'
+      path: '/company/$slug'
+      fullPath: '/company/$slug'
+      preLoaderRoute: typeof CompanySlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/$slug': {
@@ -391,8 +503,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRoute
     }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/company/new': {
+      id: '/_authenticated/company/new'
+      path: '/company/new'
+      fullPath: '/company/new'
+      preLoaderRoute: typeof AuthenticatedCompanyNewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/company/edit': {
+      id: '/_authenticated/company/edit'
+      path: '/company/edit'
+      fullPath: '/company/edit'
+      preLoaderRoute: typeof AuthenticatedCompanyEditRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedCompanyEditRoute: typeof AuthenticatedCompanyEditRoute
+  AuthenticatedCompanyNewRoute: typeof AuthenticatedCompanyNewRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedCompanyEditRoute: AuthenticatedCompanyEditRoute,
+  AuthenticatedCompanyNewRoute: AuthenticatedCompanyNewRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface BlogRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
@@ -406,11 +554,14 @@ const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   AboutExportImportRoute: AboutExportImportRoute,
+  AuthRoute: AuthRoute,
   BlogRoute: BlogRouteWithChildren,
   ChaRoute: ChaRoute,
   ContactRoute: ContactRoute,
+  DirectoryRoute: DirectoryRoute,
   DocumentationRoute: DocumentationRoute,
   FaqRoute: FaqRoute,
   GovernmentPoliciesRoute: GovernmentPoliciesRoute,
@@ -422,17 +573,8 @@ const rootRouteChildren: RootRouteChildren = {
   ShippingRoute: ShippingRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
+  CompanySlugRoute: CompanySlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
