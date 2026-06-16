@@ -22,7 +22,7 @@ function Dashboard() {
       const { data: u } = await supabase.auth.getUser();
       if (!u.user) return;
       setEmail(u.user.email ?? "");
-      const { data } = await supabase.from("companies").select("*").eq("owner_id", u.user.id).maybeSingle();
+      const { data } = await (supabase as any).from("companies").select("*").eq("owner_id", u.user.id).maybeSingle();
       setCompany(data);
       setLoading(false);
     })();

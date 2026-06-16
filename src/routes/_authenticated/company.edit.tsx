@@ -24,7 +24,7 @@ function EditCompany() {
     (async () => {
       const { data: u } = await supabase.auth.getUser();
       if (!u.user) return;
-      const { data } = await supabase.from("companies").select("*").eq("owner_id", u.user.id).maybeSingle();
+      const { data } = await (supabase as any).from("companies").select("*").eq("owner_id", u.user.id).maybeSingle();
       if (!data) { navigate({ to: "/company/new" }); return; }
       setId(data.id);
       setForm(data);
@@ -39,7 +39,7 @@ function EditCompany() {
     if (!id) return;
     setSaving(true);
     try {
-      const { error } = await supabase.from("companies").update({
+      const { error } = await (supabase as any).from("companies").update({
         name: form.name, type: form.type, category: form.category, country: form.country,
         city: form.city, year_established: form.year_established ? parseInt(form.year_established) : null,
         employees: form.employees, about: form.about, website: form.website, email: form.email,

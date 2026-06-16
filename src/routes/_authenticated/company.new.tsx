@@ -35,7 +35,7 @@ function NewCompany() {
       if (!u.user) throw new Error("Not signed in");
       const baseSlug = slugify(form.name) || "company";
       const slug = `${baseSlug}-${Math.random().toString(36).slice(2, 7)}`;
-      const { error } = await supabase.from("companies").insert({
+      const { error } = await (supabase as any).from("companies").insert({
         owner_id: u.user.id,
         name: form.name,
         slug,

@@ -28,7 +28,7 @@ function CompanyPage() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await supabase.from("companies").select("*").eq("slug", slug).maybeSingle();
+      const { data } = await (supabase as any).from("companies").select("*").eq("slug", slug).maybeSingle();
       setC(data);
       setLoading(false);
     })();
