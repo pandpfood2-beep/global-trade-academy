@@ -26,7 +26,7 @@ function Directory() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await supabase
+      const { data } = await (supabase as any)
         .from("companies")
         .select("*")
         .order("is_featured", { ascending: false })
