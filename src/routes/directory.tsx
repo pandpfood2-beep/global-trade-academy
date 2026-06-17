@@ -27,7 +27,7 @@ function Directory() {
   useEffect(() => {
     (async () => {
       const { data } = await (supabase as any)
-        .from("companies_public")
+        .from("companies")
         .select("id,name,slug,type,category,country,city,year_established,employees,about,website,logo_url,cover_url,is_verified,is_featured,plan,created_at")
         .order("is_featured", { ascending: false })
         .order("is_verified", { ascending: false })
