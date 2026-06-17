@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { SiteLayout } from "@/components/layout/SiteLayout";
 import { Button } from "@/components/ui/button";
-import { Building2, BadgeCheck, Star, MapPin, Globe, Mail, Phone, MessageCircle, Calendar, Users } from "lucide-react";
+import { InquiryDialog } from "@/components/InquiryDialog";
+import { Building2, BadgeCheck, Star, MapPin, Globe, Mail, MessageCircle, Calendar, Users, Send, ShieldCheck } from "lucide-react";
 
 export const Route = createFileRoute("/company/$slug")({
   head: ({ params }) => ({
@@ -28,7 +29,11 @@ function CompanyPage() {
 
   useEffect(() => {
     (async () => {
-      const { data } = await (supabase as any).from("companies").select("*").eq("slug", slug).maybeSingle();
+      const { data } = await (supabase as any)
+        .from("companies_public")
+        .select("id,name,slug,type,category,country,city,year_established,employees,about,website,logo_url,cover_url,is_verified,is_featured,plan")
+        .eq("slug", slug)
+        .maybeSingle();
       setC(data);
       setLoading(false);
     })();
@@ -76,18 +81,29 @@ function CompanyPage() {
               </div>
             </div>
             <div className="flex flex-col gap-2 md:w-56">
-              {c.whatsapp && (
-                <Button asChild className="bg-green-600 hover:bg-green-700">
-                  <a href={`https://wa.me/${c.whatsapp.replace(/[^0-9]/g, "")}`} target="_blank" rel="noreferrer">
-                    <MessageCircle className="mr-2 h-4 w-4" /> WhatsApp
-                  </a>
-                </Button>
-              )}
-              {c.email && (
-                <Button asChild variant="outline">
-                  <a href={`mailto:${c.email}`}><Mail className="mr-2 h-4 w-4" /> Email</a>
-                </Button>
-              )}
+              <InquiryDialog
+                companyId={c.id}
+                companyName={c.name}
+                channel="contact"
+                trigger={<Button className="w-full"><Send className="mr-2 h-4 w-4" />Contact Supplier</Button>}
+              />
+              <InquiryDialog
+                companyId={c.id}
+                companyName={c.name}
+                channel="inquiry"
+                trigger={<Button variant="outline" className="w-full"><Mail className="mr-2 h-4 w-4" />Send Inquiry</Button>}
+              />
+              <InquiryDialog
+                companyId={c.id}
+                companyName={c.name}
+                channel="whatsapp"
+                defaultSubject={`WhatsApp contact request — ${c.name}`}
+                trigger={
+                  <Button className="w-full bg-green-600 hover:bg-green-700">
+                    <MessageCircle className="mr-2 h-4 w-4" />WhatsApp Contact
+                  </Button>
+                }
+              />
             </div>
           </div>
         </div>
@@ -100,11 +116,16 @@ function CompanyPage() {
             </p>
           </div>
           <aside className="rounded-xl border bg-card p-6 space-y-3 text-sm">
-            <h3 className="font-semibold">Contact</h3>
-            {c.website && <a href={c.website} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-muted-foreground hover:text-primary"><Globe className="h-4 w-4" /> {c.website.replace(/^https?:\/\//, "")}</a>}
-            {c.email && <a href={`mailto:${c.email}`} className="flex items-center gap-2 text-muted-foreground hover:text-primary"><Mail className="h-4 w-4" /> {c.email}</a>}
-            {c.phone && <a href={`tel:${c.phone}`} className="flex items-center gap-2 text-muted-foreground hover:text-primary"><Phone className="h-4 w-4" /> {c.phone}</a>}
-            {!c.website && !c.email && !c.phone && <p className="text-muted-foreground">No public contact info.</p>}
+            <h3 className="font-semibold flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-green-600" />Protected Contact</h3>
+            <p className="text-xs text-muted-foreground">
+              For supplier privacy and to prevent spam, direct email, phone and WhatsApp numbers are not displayed publicly.
+              Use the buttons above to send a message — the supplier will respond directly.
+            </p>
+            {c.website && (
+              <a href={c.website} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-muted-foreground hover:text-primary">
+                <Globe className="h-4 w-4" /> {c.website.replace(/^https?:\/\//, "")}
+              </a>
+            )}
           </aside>
         </div>
 
