@@ -35,7 +35,7 @@ function NewCompany() {
       if (!u.user) throw new Error("Not signed in");
       const baseSlug = slugify(form.name) || "company";
       const slug = `${baseSlug}-${Math.random().toString(36).slice(2, 7)}`;
-      const { error } = await (supabase as any).from("companies").insert({
+      const { data: inserted, error } = await (supabase as any).from("companies").insert({
         owner_id: u.user.id,
         name: form.name,
         slug,
@@ -47,13 +47,19 @@ function NewCompany() {
         employees: form.employees || null,
         about: form.about || null,
         website: form.website || null,
-        email: form.email || null,
-        phone: form.phone || null,
-        whatsapp: form.whatsapp || null,
         logo_url: form.logo_url || null,
         cover_url: form.cover_url || null,
-      });
+      }).select("id").single();
       if (error) throw error;
+      if (form.email || form.phone || form.whatsapp) {
+        const { error: cErr } = await (supabase as any).from("company_contacts").insert({
+          company_id: inserted.id,
+          email: form.email || null,
+          phone: form.phone || null,
+          whatsapp: form.whatsapp || null,
+        });
+        if (cErr) throw cErr;
+      }
       toast.success("Company registered!");
       navigate({ to: "/dashboard" });
     } catch (err: any) {
