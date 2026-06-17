@@ -22,7 +22,6 @@ export type Database = {
           country: string | null
           cover_url: string | null
           created_at: string
-          email: string | null
           employees: string | null
           id: string
           is_featured: boolean
@@ -30,13 +29,11 @@ export type Database = {
           logo_url: string | null
           name: string
           owner_id: string
-          phone: string | null
           plan: Database["public"]["Enums"]["listing_plan"]
           slug: string
           type: Database["public"]["Enums"]["company_type"]
           updated_at: string
           website: string | null
-          whatsapp: string | null
           year_established: number | null
         }
         Insert: {
@@ -46,7 +43,6 @@ export type Database = {
           country?: string | null
           cover_url?: string | null
           created_at?: string
-          email?: string | null
           employees?: string | null
           id?: string
           is_featured?: boolean
@@ -54,13 +50,11 @@ export type Database = {
           logo_url?: string | null
           name: string
           owner_id: string
-          phone?: string | null
           plan?: Database["public"]["Enums"]["listing_plan"]
           slug: string
           type?: Database["public"]["Enums"]["company_type"]
           updated_at?: string
           website?: string | null
-          whatsapp?: string | null
           year_established?: number | null
         }
         Update: {
@@ -70,7 +64,6 @@ export type Database = {
           country?: string | null
           cover_url?: string | null
           created_at?: string
-          email?: string | null
           employees?: string | null
           id?: string
           is_featured?: boolean
@@ -78,16 +71,49 @@ export type Database = {
           logo_url?: string | null
           name?: string
           owner_id?: string
-          phone?: string | null
           plan?: Database["public"]["Enums"]["listing_plan"]
           slug?: string
           type?: Database["public"]["Enums"]["company_type"]
           updated_at?: string
           website?: string | null
-          whatsapp?: string | null
           year_established?: number | null
         }
         Relationships: []
+      }
+      company_contacts: {
+        Row: {
+          company_id: string
+          created_at: string
+          email: string | null
+          phone: string | null
+          updated_at: string
+          whatsapp: string | null
+        }
+        Insert: {
+          company_id: string
+          created_at?: string
+          email?: string | null
+          phone?: string | null
+          updated_at?: string
+          whatsapp?: string | null
+        }
+        Update: {
+          company_id?: string
+          created_at?: string
+          email?: string | null
+          phone?: string | null
+          updated_at?: string
+          whatsapp?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "company_contacts_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: true
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       inquiries: {
         Row: {
@@ -132,13 +158,6 @@ export type Database = {
             columns: ["company_id"]
             isOneToOne: false
             referencedRelation: "companies"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "inquiries_company_id_fkey"
-            columns: ["company_id"]
-            isOneToOne: false
-            referencedRelation: "companies_public"
             referencedColumns: ["id"]
           },
         ]
@@ -188,13 +207,6 @@ export type Database = {
             referencedRelation: "companies"
             referencedColumns: ["id"]
           },
-          {
-            foreignKeyName: "products_company_id_fkey"
-            columns: ["company_id"]
-            isOneToOne: false
-            referencedRelation: "companies_public"
-            referencedColumns: ["id"]
-          },
         ]
       }
       profiles: {
@@ -241,72 +253,7 @@ export type Database = {
       }
     }
     Views: {
-      companies_public: {
-        Row: {
-          about: string | null
-          category: string | null
-          city: string | null
-          country: string | null
-          cover_url: string | null
-          created_at: string | null
-          employees: string | null
-          id: string | null
-          is_featured: boolean | null
-          is_verified: boolean | null
-          logo_url: string | null
-          name: string | null
-          owner_id: string | null
-          plan: Database["public"]["Enums"]["listing_plan"] | null
-          slug: string | null
-          type: Database["public"]["Enums"]["company_type"] | null
-          updated_at: string | null
-          website: string | null
-          year_established: number | null
-        }
-        Insert: {
-          about?: string | null
-          category?: string | null
-          city?: string | null
-          country?: string | null
-          cover_url?: string | null
-          created_at?: string | null
-          employees?: string | null
-          id?: string | null
-          is_featured?: boolean | null
-          is_verified?: boolean | null
-          logo_url?: string | null
-          name?: string | null
-          owner_id?: string | null
-          plan?: Database["public"]["Enums"]["listing_plan"] | null
-          slug?: string | null
-          type?: Database["public"]["Enums"]["company_type"] | null
-          updated_at?: string | null
-          website?: string | null
-          year_established?: number | null
-        }
-        Update: {
-          about?: string | null
-          category?: string | null
-          city?: string | null
-          country?: string | null
-          cover_url?: string | null
-          created_at?: string | null
-          employees?: string | null
-          id?: string | null
-          is_featured?: boolean | null
-          is_verified?: boolean | null
-          logo_url?: string | null
-          name?: string | null
-          owner_id?: string | null
-          plan?: Database["public"]["Enums"]["listing_plan"] | null
-          slug?: string | null
-          type?: Database["public"]["Enums"]["company_type"] | null
-          updated_at?: string | null
-          website?: string | null
-          year_established?: number | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
       has_role: {
