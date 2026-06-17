@@ -26,8 +26,9 @@ function EditCompany() {
       if (!u.user) return;
       const { data } = await (supabase as any).from("companies").select("*").eq("owner_id", u.user.id).maybeSingle();
       if (!data) { navigate({ to: "/company/new" }); return; }
+      const { data: contacts } = await (supabase as any).from("company_contacts").select("email,phone,whatsapp").eq("company_id", data.id).maybeSingle();
       setId(data.id);
-      setForm(data);
+      setForm({ ...data, email: contacts?.email ?? "", phone: contacts?.phone ?? "", whatsapp: contacts?.whatsapp ?? "" });
       setLoading(false);
     })();
   }, [navigate]);
@@ -42,10 +43,17 @@ function EditCompany() {
       const { error } = await (supabase as any).from("companies").update({
         name: form.name, type: form.type, category: form.category, country: form.country,
         city: form.city, year_established: form.year_established ? parseInt(form.year_established) : null,
-        employees: form.employees, about: form.about, website: form.website, email: form.email,
-        phone: form.phone, whatsapp: form.whatsapp, logo_url: form.logo_url, cover_url: form.cover_url,
+        employees: form.employees, about: form.about, website: form.website,
+        logo_url: form.logo_url, cover_url: form.cover_url,
       }).eq("id", id);
       if (error) throw error;
+      const { error: cErr } = await (supabase as any).from("company_contacts").upsert({
+        company_id: id,
+        email: form.email || null,
+        phone: form.phone || null,
+        whatsapp: form.whatsapp || null,
+      }, { onConflict: "company_id" });
+      if (cErr) throw cErr;
       toast.success("Saved");
       navigate({ to: "/dashboard" });
     } catch (err: any) {
