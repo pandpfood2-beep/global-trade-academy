@@ -115,6 +115,42 @@ export type Database = {
           },
         ]
       }
+      consultancy_leads: {
+        Row: {
+          business_details: string
+          city: string
+          country: string
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          mobile: string
+          source: string | null
+        }
+        Insert: {
+          business_details: string
+          city: string
+          country: string
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          mobile: string
+          source?: string | null
+        }
+        Update: {
+          business_details?: string
+          city?: string
+          country?: string
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          mobile?: string
+          source?: string | null
+        }
+        Relationships: []
+      }
       inquiries: {
         Row: {
           channel: string
@@ -230,6 +266,39 @@ export type Database = {
           id?: string
           phone?: string | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      training_leads: {
+        Row: {
+          city: string
+          country: string
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          mobile: string
+          source: string | null
+        }
+        Insert: {
+          city: string
+          country: string
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          mobile: string
+          source?: string | null
+        }
+        Update: {
+          city?: string
+          country?: string
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          mobile?: string
+          source?: string | null
         }
         Relationships: []
       }
