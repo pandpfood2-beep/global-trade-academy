@@ -68,11 +68,14 @@ function Home() {
               you need to launch and scale a global trading business.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/about-export-import" className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-navy shadow-elegant hover:bg-white/95">
-                <BookOpen className="h-4 w-4" /> Learn More
+              <Link to="/training-inquiry" className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-semibold text-navy shadow-elegant hover:bg-white/95">
+                <BookOpen className="h-4 w-4" /> Join Training
               </Link>
-              <Link to="/contact" className="inline-flex items-center gap-2 rounded-lg border border-white/30 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur hover:bg-white/20">
-                Contact Us <ArrowRight className="h-4 w-4" />
+              <Link to="/consultancy-inquiry" className="inline-flex items-center gap-2 rounded-lg bg-brand px-6 py-3 text-sm font-semibold text-primary-foreground shadow-elegant hover:opacity-90">
+                Get Consultancy <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link to="/about-export-import" className="inline-flex items-center gap-2 rounded-lg border border-white/30 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur hover:bg-white/20">
+                Explore Knowledge
               </Link>
             </div>
             <dl className="mt-12 grid max-w-2xl grid-cols-2 gap-6 sm:grid-cols-4">

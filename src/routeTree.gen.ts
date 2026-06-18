@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TrainingInquiryRouteImport } from './routes/training-inquiry'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ShippingRouteImport } from './routes/shipping'
@@ -22,6 +23,7 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as DocumentationRouteImport } from './routes/documentation'
 import { Route as DirectoryRouteImport } from './routes/directory'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ConsultancyInquiryRouteImport } from './routes/consultancy-inquiry'
 import { Route as ChaRouteImport } from './routes/cha'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -35,6 +37,11 @@ import { Route as AuthenticatedDashboardRouteImport } from './routes/_authentica
 import { Route as AuthenticatedCompanyNewRouteImport } from './routes/_authenticated/company.new'
 import { Route as AuthenticatedCompanyEditRouteImport } from './routes/_authenticated/company.edit'
 
+const TrainingInquiryRoute = TrainingInquiryRouteImport.update({
+  id: '/training-inquiry',
+  path: '/training-inquiry',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -98,6 +105,11 @@ const DirectoryRoute = DirectoryRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConsultancyInquiryRoute = ConsultancyInquiryRouteImport.update({
+  id: '/consultancy-inquiry',
+  path: '/consultancy-inquiry',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChaRoute = ChaRouteImport.update({
@@ -168,6 +180,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/blog': typeof BlogRouteWithChildren
   '/cha': typeof ChaRoute
+  '/consultancy-inquiry': typeof ConsultancyInquiryRoute
   '/contact': typeof ContactRoute
   '/directory': typeof DirectoryRoute
   '/documentation': typeof DocumentationRoute
@@ -181,6 +194,7 @@ export interface FileRoutesByFullPath {
   '/shipping': typeof ShippingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/training-inquiry': typeof TrainingInquiryRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/company/$slug': typeof CompanySlugRoute
@@ -194,6 +208,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/blog': typeof BlogRouteWithChildren
   '/cha': typeof ChaRoute
+  '/consultancy-inquiry': typeof ConsultancyInquiryRoute
   '/contact': typeof ContactRoute
   '/directory': typeof DirectoryRoute
   '/documentation': typeof DocumentationRoute
@@ -207,6 +222,7 @@ export interface FileRoutesByTo {
   '/shipping': typeof ShippingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/training-inquiry': typeof TrainingInquiryRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/company/$slug': typeof CompanySlugRoute
@@ -222,6 +238,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/blog': typeof BlogRouteWithChildren
   '/cha': typeof ChaRoute
+  '/consultancy-inquiry': typeof ConsultancyInquiryRoute
   '/contact': typeof ContactRoute
   '/directory': typeof DirectoryRoute
   '/documentation': typeof DocumentationRoute
@@ -235,6 +252,7 @@ export interface FileRoutesById {
   '/shipping': typeof ShippingRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/training-inquiry': typeof TrainingInquiryRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/company/$slug': typeof CompanySlugRoute
@@ -250,6 +268,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/blog'
     | '/cha'
+    | '/consultancy-inquiry'
     | '/contact'
     | '/directory'
     | '/documentation'
@@ -263,6 +282,7 @@ export interface FileRouteTypes {
     | '/shipping'
     | '/sitemap.xml'
     | '/terms'
+    | '/training-inquiry'
     | '/dashboard'
     | '/blog/$slug'
     | '/company/$slug'
@@ -276,6 +296,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/blog'
     | '/cha'
+    | '/consultancy-inquiry'
     | '/contact'
     | '/directory'
     | '/documentation'
@@ -289,6 +310,7 @@ export interface FileRouteTypes {
     | '/shipping'
     | '/sitemap.xml'
     | '/terms'
+    | '/training-inquiry'
     | '/dashboard'
     | '/blog/$slug'
     | '/company/$slug'
@@ -303,6 +325,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/blog'
     | '/cha'
+    | '/consultancy-inquiry'
     | '/contact'
     | '/directory'
     | '/documentation'
@@ -316,6 +339,7 @@ export interface FileRouteTypes {
     | '/shipping'
     | '/sitemap.xml'
     | '/terms'
+    | '/training-inquiry'
     | '/_authenticated/dashboard'
     | '/blog/$slug'
     | '/company/$slug'
@@ -331,6 +355,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   BlogRoute: typeof BlogRouteWithChildren
   ChaRoute: typeof ChaRoute
+  ConsultancyInquiryRoute: typeof ConsultancyInquiryRoute
   ContactRoute: typeof ContactRoute
   DirectoryRoute: typeof DirectoryRoute
   DocumentationRoute: typeof DocumentationRoute
@@ -344,11 +369,19 @@ export interface RootRouteChildren {
   ShippingRoute: typeof ShippingRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
+  TrainingInquiryRoute: typeof TrainingInquiryRoute
   CompanySlugRoute: typeof CompanySlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/training-inquiry': {
+      id: '/training-inquiry'
+      path: '/training-inquiry'
+      fullPath: '/training-inquiry'
+      preLoaderRoute: typeof TrainingInquiryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terms': {
       id: '/terms'
       path: '/terms'
@@ -438,6 +471,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/consultancy-inquiry': {
+      id: '/consultancy-inquiry'
+      path: '/consultancy-inquiry'
+      fullPath: '/consultancy-inquiry'
+      preLoaderRoute: typeof ConsultancyInquiryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cha': {
@@ -560,6 +600,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   BlogRoute: BlogRouteWithChildren,
   ChaRoute: ChaRoute,
+  ConsultancyInquiryRoute: ConsultancyInquiryRoute,
   ContactRoute: ContactRoute,
   DirectoryRoute: DirectoryRoute,
   DocumentationRoute: DocumentationRoute,
@@ -573,18 +614,9 @@ const rootRouteChildren: RootRouteChildren = {
   ShippingRoute: ShippingRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
+  TrainingInquiryRoute: TrainingInquiryRoute,
   CompanySlugRoute: CompanySlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

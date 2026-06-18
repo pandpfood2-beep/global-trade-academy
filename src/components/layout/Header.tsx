@@ -5,13 +5,12 @@ import { useAuth } from "@/hooks/useAuth";
 
 const navLinks = [
   { to: "/", label: "Home" },
-  { to: "/directory", label: "Directory" },
-  { to: "/about-export-import", label: "Export Import" },
+  { to: "/about-export-import", label: "Knowledge" },
   { to: "/incoterms", label: "Incoterms" },
-  { to: "/cha", label: "CHA" },
   { to: "/documentation", label: "Docs" },
   { to: "/shipping", label: "Shipping" },
-  { to: "/payment-terms", label: "Payments" },
+  { to: "/training-inquiry", label: "Training" },
+  { to: "/consultancy-inquiry", label: "Consultancy" },
   { to: "/blog", label: "Blog" },
   { to: "/contact", label: "Contact" },
 ] as const;
