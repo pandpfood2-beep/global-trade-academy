@@ -56,7 +56,7 @@ async function notifyEmail(kind: Kind, payload: Record<string, unknown>) {
 
 async function insertAndForward(table: "training_leads" | "consultancy_leads", row: Record<string, unknown>) {
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-  const { error } = await supabaseAdmin.from(table).insert({ ...row, source: "website" });
+  const { error } = await (supabaseAdmin as any).from(table).insert({ ...row, source: "website" });
   if (error) throw new Error(error.message);
 }
 
